@@ -11,7 +11,7 @@ public class Main
 		KNearestNeighbors.loadData(dataset);
 
 		// Step [2] - Run the algorithm
-		IrisFlower query = new IrisFlower(5.8f, 2.7f, 5.1f, 2.3f, "virginica");
+		IrisFlower query = new IrisFlower(5.8, 2.7, 5.1, 2.3, "virginica");
 		int kNeighbors = 3;
 		KNearestNeighbors.run(dataset, query, kNeighbors);
 
