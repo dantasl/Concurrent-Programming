@@ -4,28 +4,39 @@ public class Main
 {
 	public static void main(String[] args)
 	{
+		// Defining objects instances to be used
+		Helpers classHelpers = new Helpers();
 		FileHandler fileHandler = new FileHandler();
 		MatrixMultiplication multiplicator = new MatrixMultiplication();
 		
-		int[][] A = new int[4][4];
-		int[][] B = new int[4][4];
-		int[][] C = new int[4][4];
+		// Checking if arguments passed to code execution are right
+		classHelpers.checkArguments(args);
 		
-		fileHandler.readMatrixFromFile(A, 4, "A");
-		fileHandler.readMatrixFromFile(B, 4, "B");
+		// Creating A, B and C matrices with the proper dimensions
+		int dimension = Integer.parseInt(args[0]);
+		int[][] A = new int[dimension][dimension];
+		int[][] B = new int[dimension][dimension];
+		int[][] C = new int[dimension][dimension];
 		
-		multiplicator.sequentialMultiplication(A, B, C, 4, 4, 4);
+		// Reading values from files into matrices A and B		
+		fileHandler.readMatrixFromFile(A, dimension, "A");
+		fileHandler.readMatrixFromFile(B, dimension, "B");
 		
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				System.out.println(C[i][j]);
-			}
+		// Running matrix multiplication
+		run(multiplicator, A, B, C, dimension, args[1]);
+	}
+	
+	public static void run(MatrixMultiplication multiplicator, int[][] A, int[][] B, int[][] C, int dimension, String method)
+	{
+		if (method.equals("S"))
+		{
+			System.out.println("Running sequential multiplication...");
+			multiplicator.sequentialMultiplication(A, B, C, dimension);						
+		}
+		if (method.equals("C"))
+		{
+			System.out.println("Running concurrent multiplication...");
+			//multiplicator.sequentialMultiplication(A, B, C, dimension);
 		}
 	}
 }
-
-/*for (int i = 0; i < 1024; i++) {
-	for (int j = 0; j < 1024; j++) {
-		System.out.println(matrix[i][j]);
-	}
-}*/

@@ -37,4 +37,9 @@ public class FileHandler
 			e.printStackTrace();
 		}
 	}
+	
+	public void writeMatrixIntoFile()
+	{
+		
+	}
 }
