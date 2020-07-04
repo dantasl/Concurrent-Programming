@@ -7,7 +7,6 @@ public class Main
 		// Defining objects instances to be used
 		Helpers classHelpers = new Helpers();
 		FileHandler fileHandler = new FileHandler();
-		MatrixMultiplication multiplicator = new MatrixMultiplication();
 		
 		// Checking if arguments passed to code execution are right
 		classHelpers.checkArguments(args);
@@ -16,30 +15,30 @@ public class Main
 		int dimension = Integer.parseInt(args[0]);
 		int[][] A = new int[dimension][dimension];
 		int[][] B = new int[dimension][dimension];
-		int[][] C = new int[dimension][dimension];
 		
 		// Reading values from files into matrices A and B		
 		fileHandler.readMatrixFromFile(A, dimension, "A");
 		fileHandler.readMatrixFromFile(B, dimension, "B");
+		MatrixMultiplication multiplicator = new MatrixMultiplication(A, B, dimension);
 		
 		// Running matrix multiplication
-		run(multiplicator, A, B, C, dimension, args[1]);
+		run(multiplicator, args[1]);
 		
 		// Output C into a file
-		fileHandler.writeMatrixIntoFile(C, dimension);
+		fileHandler.writeMatrixIntoFile(multiplicator.C, dimension);
 	}
 	
-	public static void run(MatrixMultiplication multiplicator, int[][] A, int[][] B, int[][] C, int dimension, String method)
+	public static void run(MatrixMultiplication multiplicator, String method)
 	{
 		if (method.equals("S"))
 		{
 			System.out.println("Now performing multiplication between A and B, sequential mode.");
-			multiplicator.sequentialMultiplication(A, B, C, dimension);				
+			multiplicator.runSequential();				
 		}
 		if (method.equals("C"))
 		{
 			System.out.println("Now performing multiplication between A and B, concurrent mode.");
-			//multiplicator.sequentialMultiplication(A, B, C, dimension);
+			//multiplicator.runConcurrent();
 		}
 	}
 }

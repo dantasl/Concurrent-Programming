@@ -2,19 +2,37 @@ package com.vertumno.matrix.multiplication;
 
 public class MatrixMultiplication
 {
-	public void sequentialMultiplication(int[][] A, int[][] B, int[][] C, int dimension)
+	public int[][] A;
+	public int[][] B;
+	public int[][] C;
+	public int dimension;
+	
+	public MatrixMultiplication(int[][] A, int[][] B, int dimension)
+	{
+		this.A = A;
+		this.B = B;
+		this.C = new int[dimension][dimension];
+		this.dimension = dimension;
+	}
+	
+	public void sequentialMultiplication()
 	{
 		for (int i = 0; i < dimension; i++)
 		{
 			for (int j = 0; j < dimension; j++)
 			{
-				int soma = 0;
+				int sum = 0;
 				for (int k = 0; k < dimension; k++)
 				{
-					soma += A[i][k] * B[k][j];
+					sum += A[i][k] * B[k][j];
 				}
-				C[i][j] = soma;
+				C[i][j] = sum;
 			}
 		}
 	}
+	
+	public void runSequential()
+	{
+		sequentialMultiplication();		
+	}	
 }
