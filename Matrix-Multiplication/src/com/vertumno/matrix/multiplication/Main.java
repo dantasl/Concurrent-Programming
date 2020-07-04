@@ -5,15 +5,27 @@ public class Main
 	public static void main(String[] args)
 	{
 		FileHandler fileHandler = new FileHandler();
-		int[][] matrix = new int[1024][1024];
+		MatrixMultiplication multiplicator = new MatrixMultiplication();
 		
-		fileHandler.readMatrixFromFile(matrix, 1024, "A");
+		int[][] A = new int[4][4];
+		int[][] B = new int[4][4];
+		int[][] C = new int[4][4];
 		
-		for (int i = 0; i < 1024; i++) {
-			for (int j = 0; j < 1024; j++) {
-				System.out.println(matrix[i][j]);
+		fileHandler.readMatrixFromFile(A, 4, "A");
+		fileHandler.readMatrixFromFile(B, 4, "B");
+		
+		multiplicator.sequentialMultiplication(A, B, C, 4, 4, 4);
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				System.out.println(C[i][j]);
 			}
 		}
-		
 	}
 }
+
+/*for (int i = 0; i < 1024; i++) {
+	for (int j = 0; j < 1024; j++) {
+		System.out.println(matrix[i][j]);
+	}
+}*/
