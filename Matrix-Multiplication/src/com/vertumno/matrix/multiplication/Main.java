@@ -24,18 +24,21 @@ public class Main
 		
 		// Running matrix multiplication
 		run(multiplicator, A, B, C, dimension, args[1]);
+		
+		// Output C into a file
+		fileHandler.writeMatrixIntoFile(C, dimension);
 	}
 	
 	public static void run(MatrixMultiplication multiplicator, int[][] A, int[][] B, int[][] C, int dimension, String method)
 	{
 		if (method.equals("S"))
 		{
-			System.out.println("Running sequential multiplication...");
-			multiplicator.sequentialMultiplication(A, B, C, dimension);						
+			System.out.println("Now performing multiplication between A and B, sequential mode.");
+			multiplicator.sequentialMultiplication(A, B, C, dimension);				
 		}
 		if (method.equals("C"))
 		{
-			System.out.println("Running concurrent multiplication...");
+			System.out.println("Now performing multiplication between A and B, concurrent mode.");
 			//multiplicator.sequentialMultiplication(A, B, C, dimension);
 		}
 	}

@@ -1,6 +1,8 @@
 package com.vertumno.matrix.multiplication;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +13,7 @@ public class FileHandler
 	public void readMatrixFromFile(int[][] matrix, int lines, String matrixAOrB)
 	{
 		Path path = Paths.get("data/"+ matrixAOrB + lines + "x" + lines + ".txt");
+		System.out.println("Attempting to read file data/" + matrixAOrB + lines + "x" + lines + ".txt");
 		String currentLine;
 		try
 		{
@@ -31,6 +34,7 @@ public class FileHandler
 				}
 				lineCounter++;
 			}
+			System.out.println("File read and converted to matrix with success.");
 		}
 		catch (IOException e)
 		{
@@ -38,8 +42,23 @@ public class FileHandler
 		}
 	}
 	
-	public void writeMatrixIntoFile()
+	public void writeMatrixIntoFile(int[][] matrix, int dimension)
 	{
-		
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter("output/C" + dimension + "x" + dimension + ".txt"));
+			writer.write(dimension + " " + dimension + "\n");
+			for (int line = 0; line < dimension; line++)
+			{
+				for (int column = 0; column < dimension; column++)
+				{
+					writer.write(matrix[line][column] + " ");
+				}
+				writer.write("\n");
+			}			
+			writer.close();
+			System.out.println("Saved resulting matrix C at output/C" + dimension + "x" + dimension + ".txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
