@@ -31,8 +31,11 @@ public class MatrixMultiplication
 		}
 	}
 	
-	public void runSequential()
+	public void run(String method)
 	{
-		sequentialMultiplication();		
+		for (int i = 0; i < 20; i++)
+		{
+			sequentialMultiplication();			
+		}		
 	}	
 }

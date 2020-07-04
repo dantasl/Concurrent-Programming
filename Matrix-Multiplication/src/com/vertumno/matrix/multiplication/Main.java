@@ -22,23 +22,9 @@ public class Main
 		MatrixMultiplication multiplicator = new MatrixMultiplication(A, B, dimension);
 		
 		// Running matrix multiplication
-		run(multiplicator, args[1]);
+		multiplicator.run(args[1]);
 		
 		// Output C into a file
 		fileHandler.writeMatrixIntoFile(multiplicator.C, dimension);
-	}
-	
-	public static void run(MatrixMultiplication multiplicator, String method)
-	{
-		if (method.equals("S"))
-		{
-			System.out.println("Now performing multiplication between A and B, sequential mode.");
-			multiplicator.runSequential();				
-		}
-		if (method.equals("C"))
-		{
-			System.out.println("Now performing multiplication between A and B, concurrent mode.");
-			//multiplicator.runConcurrent();
-		}
 	}
 }
