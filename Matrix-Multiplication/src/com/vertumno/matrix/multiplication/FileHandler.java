@@ -8,16 +8,28 @@ import java.nio.file.Paths;
 
 public class FileHandler
 {
-	public void readMatrixFromFile(String filename)
+	public void readMatrixFromFile(int[][] matrix, int lines, String matrixAOrB)
 	{
-		Path path = Paths.get(filename);
+		Path path = Paths.get("data/"+ matrixAOrB + lines + "x" + lines + ".txt");
 		String currentLine;
 		try
 		{
-			BufferedReader reader = Files.newBufferedReader(path);	
+			int lineCounter = 0;
+			BufferedReader reader = Files.newBufferedReader(path);
+			currentLine = reader.readLine();
 			while( (currentLine = reader.readLine()) != null )
 			{
-				System.out.println(currentLine);				
+				String[] lineNumbers = currentLine.split("\\s+");
+				if (lineNumbers.length != lines)
+				{
+					System.out.println("Invalid matrix file.");
+					return;
+				}
+				for (int column = 0; column < lineNumbers.length; column++)
+				{
+					matrix[lineCounter][column] = Integer.parseInt(lineNumbers[column]);					
+				}
+				lineCounter++;
 			}
 		}
 		catch (IOException e)
