@@ -1,11 +1,15 @@
 package com.vertumno.matrix.multiplication;
 
+import java.time.Instant;
+import java.time.Duration;
+
 public class MatrixMultiplication
 {
 	public int[][] A;
 	public int[][] B;
 	public int[][] C;
 	public int dimension;
+	private long[] executionTimes;
 	
 	public MatrixMultiplication(int[][] A, int[][] B, int dimension)
 	{
@@ -13,6 +17,7 @@ public class MatrixMultiplication
 		this.B = B;
 		this.C = new int[dimension][dimension];
 		this.dimension = dimension;
+		this.executionTimes = new long[20];
 	}
 	
 	public void sequentialMultiplication()
@@ -35,7 +40,10 @@ public class MatrixMultiplication
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			sequentialMultiplication();			
+			Instant start = Instant.now();
+			sequentialMultiplication();
+			Instant finish = Instant.now();
+			executionTimes[i] = Duration.between(start, finish).toMillis();
 		}		
 	}	
 }

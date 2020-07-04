@@ -6,7 +6,8 @@ public class Helpers
 	public boolean isLogBaseTwo(int value)
 	{
 		if (value == 0 | value == 1) return false;
-		return ((Math.log(value) / Math.log(2))) % 2 == 0;
+		double log = Math.log(value) / Math.log(2);
+		return Math.pow(2, log) == value;
 	}
 	
 	public void checkArguments(String[] args)
