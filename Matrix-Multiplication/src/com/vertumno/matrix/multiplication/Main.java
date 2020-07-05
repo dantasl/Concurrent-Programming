@@ -19,10 +19,10 @@ public class Main
 		// Reading values from files into matrices A and B		
 		fileHandler.readMatrixFromFile(A, dimension, "A");
 		fileHandler.readMatrixFromFile(B, dimension, "B");
-		MatrixMultiplication multiplicator = new MatrixMultiplication(A, B, dimension);
+		MatrixMultiplication multiplicator = new MatrixMultiplication(A, B, dimension, args[1]);
 		
 		// Running matrix multiplication
-		multiplicator.run(args[1]);
+		multiplicator.run();
 		
 		// Output C into a file
 		fileHandler.writeMatrixIntoFile(multiplicator.C, dimension);
