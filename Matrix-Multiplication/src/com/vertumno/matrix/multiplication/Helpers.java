@@ -1,5 +1,7 @@
 package com.vertumno.matrix.multiplication;
 import java.lang.Math;
+import java.util.Collections;
+import java.util.Vector;
 
 public class Helpers
 {
@@ -41,5 +43,44 @@ public class Helpers
 			}
 			System.out.println("\n");
 		}		
+	}
+	
+	public void resetMatrix(int[][] C, int dimension)
+	{
+		for (int i = 0; i < dimension; i++)
+		{
+			for (int j = 0; j < dimension; j++)
+			{
+				C[i][j] = 0;
+			}
+		}
+	}
+	
+	public double getAverageExecutionTime(Vector<Long> executionTimes)
+	{
+		Long sum = (long) 0;
+		for (Long time : executionTimes)
+			sum += time;
+		return sum / 20;
+	}
+	
+	public double getStandardDeviation(Vector<Long> executionTimes, double averageTime)
+	{
+		double distance = 0;
+		for (int i = 0; i < 20; i++)
+			distance += Math.pow(executionTimes.get(i) - averageTime, 2);
+		distance /= 20;
+		return Math.sqrt(distance);
+	}
+	
+	public void writeMetrics(Vector<Long> executionTimes, int dimension, String mode)
+	{
+		FileHandler fileHandler = new FileHandler();		
+		Collections.sort(executionTimes);
+		long minimum = executionTimes.firstElement();
+		long maximum = executionTimes.lastElement();
+		double average = getAverageExecutionTime(executionTimes);
+		double standardDeviation = getStandardDeviation(executionTimes, average);
+		fileHandler.writeMetricsIntoFile(minimum, maximum, average, standardDeviation, dimension, mode);
 	}
 }
