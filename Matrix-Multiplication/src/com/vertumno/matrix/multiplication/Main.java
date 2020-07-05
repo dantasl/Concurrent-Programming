@@ -11,7 +11,7 @@ public class Main
 		// Checking if arguments passed to code execution are right
 		classHelpers.checkArguments(args);
 		
-		// Creating A, B and C matrices with the proper dimensions
+		// Creating A and B matrices with the proper dimensions
 		int dimension = Integer.parseInt(args[0]);
 		int[][] A = new int[dimension][dimension];
 		int[][] B = new int[dimension][dimension];

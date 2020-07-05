@@ -67,8 +67,7 @@ public class FileHandler
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("output/metrics.txt", true));
 			String metrics = "Metrics (in milliseconds) for " + dimension + "x" + dimension + " in mode " + mode + ": " +
-							 minimum + " minimum, " + maximum + " maximum, " + average + " average and " + standardDeviation +
-							 " standard deviation. \n";
+							 minimum + " minimum, " + maximum + " maximum, " + average + " average and " + standardDeviation + " standard deviation. \n";
 			writer.write(metrics);
 			writer.close();
 			System.out.println("Appended metrics for this execution at output/metrics.txt");

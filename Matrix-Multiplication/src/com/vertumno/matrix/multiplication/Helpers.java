@@ -34,7 +34,12 @@ public class Helpers
 	public void printMatrix(int[][] matrix, int dimension)
 	{
 		for (int i = 0; i < dimension; i++)
+		{
 			for (int j = 0; j < dimension; j++)
-				System.out.println(matrix[i][j]);
+			{
+				System.out.print(matrix[i][j] + " ");				
+			}
+			System.out.println("\n");
+		}		
 	}
 }
