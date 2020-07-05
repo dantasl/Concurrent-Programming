@@ -36,7 +36,7 @@ public class MatrixMultiplication
 			Instant start = Instant.now();
 			sequentialMultiplication.multiply(A, B, C, dimension);
 			Instant finish = Instant.now();
-			executionTimes.addElement(Duration.between(start, finish).toMillis());
+			executionTimes.addElement(Duration.between(start, finish).toNanos());
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class MatrixMultiplication
 				}
 			}
 			Instant finish = Instant.now();
-			executionTimes.addElement(Duration.between(start, finish).toMillis());
+			executionTimes.addElement(Duration.between(start, finish).toNanos());
 		}
 	}
 	
