@@ -65,7 +65,7 @@ public class FileHandler
 	public void writeMetricsIntoFile(long minimum, long maximum, double average, double standardDeviation, int dimension, String mode)
 	{
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("output/metrics.txt"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter("output/metrics.txt", true));
 			String metrics = "Metrics (in milliseconds) for " + dimension + "x" + dimension + " in mode " + mode + ": " +
 							 minimum + " minimum, " + maximum + " maximum, " + average + " average and " + standardDeviation +
 							 " standard deviation. \n";
