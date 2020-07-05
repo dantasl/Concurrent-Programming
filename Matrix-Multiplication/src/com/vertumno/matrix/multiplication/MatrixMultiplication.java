@@ -23,29 +23,28 @@ public class MatrixMultiplication
 		this.mode = mode;
 	}
 	
-	public void sequentialMultiplication()
-	{
-		for (int i = 0; i < dimension; i++)
-		{
-			for (int j = 0; j < dimension; j++)
-			{
-				for (int k = 0; k < dimension; k++)
-				{
-					C[i][j] += A[i][k] * B[k][j];
-				}
-			}
-		}
-	}
-	
 	public void run()
 	{
 		Helpers helperClass = new Helpers();
+		SequentialMultiplication sequentialMultiplication = new SequentialMultiplication();
+		ConcurrentMultiplication concurrentMultiplication = new ConcurrentMultiplication();
 		for (int i = 0; i < 20; i++)
 		{
 			helperClass.resetMatrix(C, dimension);
-			Instant start = Instant.now();
-			sequentialMultiplication();
-			Instant finish = Instant.now();
+			Instant start = null, finish = null;
+			// I know this bit breaks the DRY principle, but since I'm not sure how the comparing affects time...
+			if (mode.equals("S"))
+			{
+				start = Instant.now();
+				sequentialMultiplication.multiply(A, B, C, dimension);
+				finish = Instant.now();
+			}
+			if (mode.equals("C"))
+			{
+				start = Instant.now();
+				concurrentMultiplication.multiply(A, B, C, dimension);
+				finish = Instant.now();
+			}
 			executionTimes.addElement(Duration.between(start, finish).toMillis());
 		}
 		helperClass.writeMetrics(executionTimes, dimension, mode);
