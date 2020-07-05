@@ -71,6 +71,7 @@ public class FileHandler
 							 " standard deviation. \n";
 			writer.write(metrics);
 			writer.close();
+			System.out.println("Appended metrics for this execution at output/metrics.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		

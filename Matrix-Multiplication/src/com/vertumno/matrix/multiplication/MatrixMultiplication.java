@@ -50,7 +50,11 @@ public class MatrixMultiplication
 	
 	public double getStandardDeviation(double averageTime)
 	{
-		return 0;		
+		double distance = 0;
+		for (int i = 0; i < 20; i++)
+			distance += Math.pow(executionTimes.get(i) - averageTime, 2);
+		distance /= 20;
+		return Math.sqrt(distance);
 	}
 	
 	public void writeMetrics()
