@@ -30,12 +30,21 @@ public class MatrixMultiplication
 		{
 			for (int j = 0; j < dimension; j++)
 			{
-				int sum = 0;
 				for (int k = 0; k < dimension; k++)
 				{
-					sum += A[i][k] * B[k][j];
+					C[i][j] += A[i][k] * B[k][j];
 				}
-				C[i][j] = sum;
+			}
+		}
+	}
+	
+	public void resetCMatrix()
+	{
+		for (int i = 0; i < dimension; i++)
+		{
+			for (int j = 0; j < dimension; j++)
+			{
+				C[i][j] = 0;
 			}
 		}
 	}
@@ -72,6 +81,7 @@ public class MatrixMultiplication
 	{
 		for (int i = 0; i < 20; i++)
 		{
+			resetCMatrix();
 			Instant start = Instant.now();
 			sequentialMultiplication();
 			Instant finish = Instant.now();
