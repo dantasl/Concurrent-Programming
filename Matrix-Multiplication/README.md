@@ -13,7 +13,7 @@ After running the code, two outputs shall be generated: a file containing the re
 
 ## Running
 
-In order to run the code, you must provide two valid arguments. First, the matrices to be multiplied. In order to do so, , just type their dimension (e.g. 4, 
+In order to run the code, you must provide two valid arguments. First, the matrices to be multiplied. In order to do so, just type their dimension (e.g. 4, 
 8, 16, etc.), all of them being a power of 2 number based.
 
 Second, you need to inform if the code will be run with the sequential or the concurrent version. For that, your options are <code>C</code> (for Concurrent) and
