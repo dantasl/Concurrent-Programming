@@ -10,6 +10,7 @@ public class SearchList extends Thread {
 	
 	@Override
 	public void run() {
-		sharedList.search(1);
+		int value = (int) (Math.random() * 100) + 1;
+		sharedList.search(value);
 	}
 }

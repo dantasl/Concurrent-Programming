@@ -1,11 +1,10 @@
 package com.vertumno.list.synchronization;
 
 public class Main {
-	private static final int LIST_SIZE = 100;
 	private static final int NUM_THREADS = 3;
 	
 	public static void main(String[] args) {
-		SharedList sharedList = new SharedList(LIST_SIZE);
+		SharedList sharedList = new SharedList();
 		
 		SearchList[] searches = new SearchList[NUM_THREADS];
 		InsertList[] inserts = new InsertList[NUM_THREADS];

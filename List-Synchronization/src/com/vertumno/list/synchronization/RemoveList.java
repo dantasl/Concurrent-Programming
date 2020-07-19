@@ -10,6 +10,7 @@ public class RemoveList extends Thread {
 	
 	@Override
 	public void run() {
-		sharedList.remove(1);
+		Integer value = (int) (Math.random() * 100) + 1;
+		sharedList.remove(value);
 	}
 }

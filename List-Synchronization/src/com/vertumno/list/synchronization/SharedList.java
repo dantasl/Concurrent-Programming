@@ -5,28 +5,63 @@ package com.vertumno.list.synchronization;
  */
 
 import java.util.LinkedList;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class SharedList {
-	private int size;
 	private LinkedList<Integer> list;
+	private ReentrantReadWriteLock accessLock;
+	private ReentrantLock insertLock;
 	
-	public SharedList(int size) {
-		this.size = size;
+	public SharedList() {
 		list = new LinkedList<>();
+		accessLock = new ReentrantReadWriteLock(true);
+		insertLock = new ReentrantLock(true);
 	}
 	
-	public synchronized void search(int item) {
-		System.out.println(Thread.currentThread().getName() + " is searching for " + item);
-		list.contains(item);		
+	public void search(int value) {
+		System.out.println(Thread.currentThread().getName() + " is trying to acquire read lock for searching value " + value + ".");		
+		accessLock.readLock().lock();
+		System.out.println(Thread.currentThread().getName() + " just acquired read lock for searching.");
+		
+		try {
+			System.out.println("Element " + value + " is in list? " + list.contains(value));
+		} finally {
+			accessLock.readLock().unlock();
+			System.out.println(Thread.currentThread().getName() + " finished the search and released the read lock.");
+		}		
 	}
 	
-	public synchronized void insert(int item) {
-		System.out.println(Thread.currentThread().getName() + " is inserting " + item);
-		list.add(item);
+	public void insert(int value) {
+		System.out.println(Thread.currentThread().getName() + " is trying to acquire lock for inserting value " + value + ".");		
+		accessLock.readLock().lock();
+		insertLock.lock();
+		System.out.println(Thread.currentThread().getName() + " just acquired lock for inserting.");
+				
+		try {
+			list.add(value);
+			System.out.println("Element " + value + " inserted at the back of the list.");
+		} finally {
+			insertLock.unlock();
+			accessLock.readLock().unlock();
+			System.out.println(Thread.currentThread().getName() + " finished inserting and released the lock.");
+		}
 	}
 	
-	public synchronized void remove(int item) {
-		System.out.println(Thread.currentThread().getName() + " is removing " + item);
-		list.remove(item);
+	public void remove(Integer value) {
+		System.out.println(Thread.currentThread().getName() + " is trying to acquire write lock for removing value " + value + ".");		
+		accessLock.writeLock().lock();
+		System.out.println(Thread.currentThread().getName() + " just acquired write lock for removing.");
+		
+		try {
+			if (list.remove(value)) {
+				System.out.println("Element " + value + " removed from the list.");
+			} else {
+				System.out.println("Element " + value + " not removed because he was not in the list.");
+			}
+		} finally {
+			accessLock.writeLock().unlock();
+			System.out.println(Thread.currentThread().getName() + " finished the remove and released the write lock.");
+		}
 	}
 }

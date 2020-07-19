@@ -10,6 +10,7 @@ public class InsertList extends Thread {
 	
 	@Override
 	public void run() {
-		sharedList.insert(1);
+		int value = (int) (Math.random() * 100) + 1;
+		sharedList.insert(value);
 	}
 }
